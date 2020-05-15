@@ -1,0 +1,41 @@
+{
+    "desks": [{
+      "products": {
+        "allIds": [
+          2
+        ],
+        "byIds": {
+          "2": {
+            "product": {
+              "coords": {
+                "x": 376,
+                "y": 239
+              },
+              "id": 2,
+              "properties": {
+                "brand": "Apple",
+                "model": "Macbook Pro",
+                "category": "Computer",
+                "url": "https://www.amazon.com/Apple-MacBook-13-inch-Storage-Keyboard/dp/B0882KD98F/ref=sr_1_1_sspa",
+                "cost": "1199.99",
+                "pros": "Nice battery life",
+                "cons": "Have to buy adapters for everything"
+              }
+            },
+            "saved": true,
+            "selected": false
+          }
+        }
+      },
+      "name": "Big Bertha",
+      "use": "WFH, Gaming, Programming...",
+      "favorite": "My Macbook!",
+      "user": {
+        "username": "caimjonathan",
+        "firstname": "Jonathan",
+        "lastname": "Cai",
+        "email": "caimjonathan@gmail.com"
+      },
+      "img": "https://gridfiti.com/wp-content/uploads/2020/01/Minimalistic-Desk-from-Sproctor-1.jpg"
+    }]
+}

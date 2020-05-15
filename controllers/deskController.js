@@ -1,37 +1,27 @@
 // import mongoose from 'mongoose'; 
 // import list from '../models/listModel.js';
-
-// exports.getDesk = (req, res) => {
-//     list.findById(req.params.listId, (err, list) => {
-//         if (err) {
-//             res.send(err);
-//         }
-
-//         res.json(list);
-//     });
-// };
+var desks = [];
 
 exports.getAllDesks = (req, res) => {
-    // list.find({}, (err, lists) => {
-    //     if (err) {
-    //         res.send(err);
-    //     }
-
-    //     res.json(lists);
-    // });
-    console.log("Getting all desks!");
+    console.log("Getting all " + desks.length.toString() + " desks!");
+    res.json({
+        desks: desks
+    });
 };
 
 exports.createDesk = (req, res) => {
     console.log("Creating new desk!")
-    console.log("Received body:");
-    console.log(req.body);
-    // const newDesk = new list(req.body);
-    // newDesk.save((err, list) => {
-    //     if (err) {
-    //         res.send(err);
-    //     }
+    var { desk } = req.body;
+    desks.push(desk);
+    res.json({
+        good: true
+    })
+};
 
-    //     res.json(list);
-    // });
+exports.deleteAllDesks = (req, res) => {
+    console.log("Deleting all desks!")
+    desks = [];
+    res.json({
+        good: true
+    })
 };
