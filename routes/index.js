@@ -1,13 +1,11 @@
 import deskbook from '../controllers/deskController';
 
 export default (app) => {
-    app.route('/desks')
+    app.route('/desk/all')
         .get(deskbook.getAllDesks)
         .delete(deskbook.deleteAllDesks);
-        // .post(deskbook.createDesk)
 
-    app.route('/desks/new')
+    app.route('/desk')
+        .get(deskbook.getDesk)
         .post(deskbook.createDesk)
-        // .get(deskbook.getDesk)
-        // .delete(deskbook.deleteDesk);
 };
