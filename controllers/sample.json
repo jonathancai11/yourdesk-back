@@ -37,5 +37,63 @@
         "email": "caimjonathan@gmail.com"
       },
       "img": "https://gridfiti.com/wp-content/uploads/2020/01/Minimalistic-Desk-from-Sproctor-1.jpg"
-    }]
+    }],
+    "products": [{
+        "img": "https://images-na.ssl-images-amazon.com/images/I/71HI3U9ZwZL._AC_SL1500_.jpg",
+        "brand": "Apple",
+        "model": "Macbook Pro",
+        "price": 1199.99,
+        "url": "https://www.amazon.com/Apple-MacBook-13-inch-Storage-Keyboard/dp/B0882KD98F/ref=sr_1_1_sspa",
+        "category": "Computer"
+      }, {
+        "img": "https://images-na.ssl-images-amazon.com/images/I/71HI3U9ZwZL._AC_SL1500_.jpg",
+        "brand": "Apple",
+        "model": "Macbook Pro",
+        "price": 1199.99,
+        "url": "https://www.amazon.com/Apple-MacBook-13-inch-Storage-Keyboard/dp/B0882KD98F/ref=sr_1_1_sspa",
+        "category": "Computer"
+      }, {
+        "img": "https://images-na.ssl-images-amazon.com/images/I/71HI3U9ZwZL._AC_SL1500_.jpg",
+        "brand": "Apple",
+        "model": "Macbook Pro",
+        "price": 1199.99,
+        "url": "https://www.amazon.com/Apple-MacBook-13-inch-Storage-Keyboard/dp/B0882KD98F/ref=sr_1_1_sspa",
+        "category": "Computer"
+      }, {
+        "img": "https://images-na.ssl-images-amazon.com/images/I/71HI3U9ZwZL._AC_SL1500_.jpg",
+        "brand": "Apple",
+        "model": "Macbook Pro",
+        "price": 1199.99,
+        "url": "https://www.amazon.com/Apple-MacBook-13-inch-Storage-Keyboard/dp/B0882KD98F/ref=sr_1_1_sspa",
+        "category": "Computer"
+      }, {
+        "img": "https://images-na.ssl-images-amazon.com/images/I/71HI3U9ZwZL._AC_SL1500_.jpg",
+        "brand": "Apple",
+        "model": "Macbook Pro",
+        "price": 1199.99,
+        "url": "https://www.amazon.com/Apple-MacBook-13-inch-Storage-Keyboard/dp/B0882KD98F/ref=sr_1_1_sspa",
+        "category": "Computer"
+      }, {
+        "img": "https://images-na.ssl-images-amazon.com/images/I/71HI3U9ZwZL._AC_SL1500_.jpg",
+        "brand": "Apple",
+        "model": "Macbook Pro",
+        "price": 1199.99,
+        "url": "https://www.amazon.com/Apple-MacBook-13-inch-Storage-Keyboard/dp/B0882KD98F/ref=sr_1_1_sspa",
+        "category": "Computer"
+      }, {
+        "img": "https://images-na.ssl-images-amazon.com/images/I/71HI3U9ZwZL._AC_SL1500_.jpg",
+        "brand": "Apple",
+        "model": "Macbook Pro",
+        "price": 1199.99,
+        "url": "https://www.amazon.com/Apple-MacBook-13-inch-Storage-Keyboard/dp/B0882KD98F/ref=sr_1_1_sspa",
+        "category": "Computer"
+      }, {
+        "img": "https://images-na.ssl-images-amazon.com/images/I/71HI3U9ZwZL._AC_SL1500_.jpg",
+        "brand": "Apple",
+        "model": "Macbook Pro",
+        "price": 1199.99,
+        "url": "https://www.amazon.com/Apple-MacBook-13-inch-Storage-Keyboard/dp/B0882KD98F/ref=sr_1_1_sspa",
+        "category": "Computer"
+      }
+    ]
 }

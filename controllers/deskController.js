@@ -48,3 +48,10 @@ exports.deleteAllDesks = (req, res) => {
         success: true
     })
 };
+
+exports.getFeaturedDesks = (req, res) => {
+    console.log("Getting all " + desks.length.toString() + " desks!");
+    res.json({
+        desks: desks.slice(0, 5)
+    });
+}
