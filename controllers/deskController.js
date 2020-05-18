@@ -17,7 +17,6 @@ exports.getDesk = (req, res) => {
     var deskInt = parseInt(deskId);
 
     for (let i = 0; i < desks.length; i++) {
-        console.log(i, desks[i].id, deskInt);
         if (desks[i].id === deskInt) {
             res.json({
                 success: true,
