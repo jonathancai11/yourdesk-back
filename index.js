@@ -2,7 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import routes from './routes/index.js';
-import uri from './config/keys_prod';
+// import uri from './config/keys_prod';
 
 
 var cors = require('cors');
@@ -10,13 +10,13 @@ const path = require('path');
 
 const app = express();
 
-/* Connect to the database */
-try {
-    mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true});
-} catch (error) {
-    console.log("Error on initial connection");
-    console.log(error);
-}
+// /* Connect to the database */
+// try {
+//     mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true});
+// } catch (error) {
+//     console.log("Error on initial connection");
+//     console.log(error);
+// }
 
 mongoose.connection.on('error', err => {
     console.log("Error after initial connection");
