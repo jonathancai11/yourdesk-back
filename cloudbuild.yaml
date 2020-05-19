@@ -6,9 +6,9 @@ steps:
   env:
     - 'MY_ENV_VAR=${_MY_ENV_VAR}'
 - name: 'gcr.io/cloud-builders/npm'
+  args: ["install", "--prefix", "client"]
+- name: 'gcr.io/cloud-builders/npm'
   args: ["run", "build-client"]
-  env:
-    - 'MY_ENV_VAR=${_MY_ENV_VAR}'
 - name: "gcr.io/cloud-builders/gcloud"
   args: ["app", "deploy", "app.yaml", "-v", "$_GAE_VERSION"]
 timeout: "1600s"
