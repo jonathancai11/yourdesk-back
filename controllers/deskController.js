@@ -25,7 +25,6 @@ exports.getDesk = (req, res) => {
             return;
         }
     }
-
     res.json({
         success: false
     })

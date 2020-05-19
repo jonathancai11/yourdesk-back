@@ -1,0 +1,17 @@
+{
+    "products": {
+      "allIds": [],
+      "byIds": {}
+    },
+    "name": "The Commmand Center",
+    "use": "WFH, Gaming, Programming...",
+    "favorite": "My Macbook!",
+    "user": {
+      "username": "caimjonathan",
+      "firstname": "Jonathan",
+      "lastname": "Cai",
+      "email": "caimjonathan@gmail.com"
+    },
+    "img": "http://res.cloudinary.com/dposi4dxq/image/upload/v1589766547/b2by6kdoukc7d3qyceqe.jpg",
+    "date_created": "2020-05-18T01:49:06.716Z"
+}
