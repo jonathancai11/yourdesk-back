@@ -32,7 +32,7 @@ export default function Home() {
     return (
         <div className="body">
             <div className="Home">
-
+                
                 {/* <div className="Splash"> */}
                 <div className="SplashText">
                     <h1 className="HomeTitle">As we work/game/study at our desk more often,</h1>

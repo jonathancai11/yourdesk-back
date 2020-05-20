@@ -1,6 +1,8 @@
 import { SIGNIN, SIGNOUT, 
-  ADD_PRODUCT, CLEAR_ALL_PRODUCTS, DELETE_PRODUCT, ADD_PRODUCT_PROPERTIES, TOGGLE_SELECTED_PRODUCT, TOGGLE_DESELECT_ALL_PRODUCTS, SET_ALL_PRODUCTS,
-  SHOW_MODAL, HIDE_MODAL } from "./actionTypes";
+  ADD_PRODUCT, CLEAR_ALL_PRODUCTS, DELETE_PRODUCT, ADD_PRODUCT_PROPERTIES, 
+  TOGGLE_SELECTED_PRODUCT, TOGGLE_DESELECT_ALL_PRODUCTS, SET_ALL_PRODUCTS,
+  SHOW_AUTH_MODAL, HIDE_AUTH_MODAL, SET_CURRENT_PRODUCT,
+  SHOW_PRODUCT_MODAL, HIDE_PRODUCT_MODAL } from "./actionTypes";
 
 let nextProductId = 0;
 
@@ -24,6 +26,15 @@ export const addProduct = product => {
       product: product
     }
   });
+}
+
+export const setCurrentProduct = product => {
+  return ({
+    type: SET_CURRENT_PRODUCT,
+    payload: {
+      product: product
+    }
+  })
 }
 
 export const addProductProperties = product => ({
@@ -60,12 +71,20 @@ export const deselectProduct = product => ({
   }
 });
 
-export const showModal = () => ({
-  type: SHOW_MODAL
+export const showProductModal = () => ({
+  type: SHOW_PRODUCT_MODAL
 });
 
-export const hideModal = () => ({
-  type: HIDE_MODAL
+export const hideProductModal = () => ({
+  type: HIDE_PRODUCT_MODAL
+});
+
+export const showAuthModal = () => ({
+  type: SHOW_AUTH_MODAL
+});
+
+export const hideAuthModal = () => ({
+  type: HIDE_AUTH_MODAL
 });
 
 export const deselectAllProducts = () => ({

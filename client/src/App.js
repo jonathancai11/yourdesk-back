@@ -11,6 +11,7 @@ import Explore from './pages/Explore/Explore';
 import Desk from './pages/Desk/Desk';
 import FourOhFour from './pages/FourOhFour/FourOhFour';
 import Charts from './pages/Charts/Charts';
+import AuthModal from './components/AuthModal/AuthModal';
 
 import './style/App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -21,6 +22,7 @@ function App() {
     <div className="App">
       <Router>
           <Header/>
+          <AuthModal/>
             <Switch>
               <Route exact path="/explore" component={Explore}/>
               <Route exact path="/about" component={About}/>

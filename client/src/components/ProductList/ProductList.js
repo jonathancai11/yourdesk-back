@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, Accordion, Button } from 'react-bootstrap';
 import { useSelector, useDispatch } from "react-redux";
-import { selectProduct, deselectProduct, deleteProduct } from '../../redux/actions';
+import { selectProduct, deselectProduct, deleteProduct, setCurrentProduct, showProductModal } from '../../redux/actions';
 
 export default function ProductCard(props) {
 
@@ -30,6 +30,11 @@ export default function ProductCard(props) {
         dispatch(deleteProduct(product));
     }
 
+    const handleEdit = product => {
+        dispatch(setCurrentProduct(product));
+        dispatch(showProductModal());
+    }
+
     return (
     <div className={props.show ? "ProductList" : "hidden"}>
         <Accordion>
@@ -41,10 +46,14 @@ export default function ProductCard(props) {
                 <Card key={i}>
                     <Accordion.Toggle as={Card.Header} onMouseOver={() => handleMouse(selected, product)} onMouseOut={() => handleMouse(selected, product)} 
                         eventKey={i} style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
-                   
-                   {product.properties.brand + " " + product.properties.model} {"$" + (product.properties.cost ? product.properties.cost : "0")}
+                        
+                        {product.properties.brand + " " + product.properties.model} {"$" + (product.properties.cost ? product.properties.cost : "0")}
 
-                    {props.share && <Button variant="outline-danger" size="sm" onClick={() => handleDelete(product)}>Delete</Button>}
+                        <div>
+                            {props.share && <Button variant="outline-danger" size="sm" onClick={() => handleDelete(product)}>Delete</Button>}
+                            &nbsp;
+                            {props.share && <Button variant="outline-primary" size="sm" onClick={() => handleEdit(product)}>Edit</Button>}
+                        </div>
                     </Accordion.Toggle>
 
                     <Accordion.Collapse eventKey={i} in={selected}>
@@ -52,9 +61,9 @@ export default function ProductCard(props) {
                     
                     <p>Category: {product.properties.category}</p>
                     <p>Pros:</p>
-                    <p>{product.properties.pros}</p>
+                    <p>{product.pros}</p>
                     <p>Cons:</p>
-                    <p>{product.properties.cons}</p>
+                    <p>{product.cons}</p>
 
                     </Card.Body>
                     </Accordion.Collapse>

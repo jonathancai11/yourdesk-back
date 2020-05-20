@@ -7,7 +7,7 @@ import { createDesk, uploadImage } from '../../util/api';
 export default function ShareForm(props) {
 
     const products = useSelector(store => store.products);
-    const user = useSelector(store => store.user);
+    const { user } = useSelector(store => store.user);
 
     const { onSuccessfulUpload } = props; 
 
@@ -31,10 +31,12 @@ export default function ShareForm(props) {
             var desk = {
                 products: products,
                 ...properties,
-                user: user,
+                user: user._id,
                 img: url,
                 date_created: new Date(),
             }
+
+            console.log(JSON.stringify(desk, null, 2));
 
             createDesk(desk).then((data) => {
                 console.log(data);
@@ -53,17 +55,17 @@ export default function ShareForm(props) {
         <Form className={props.show ? "MainForm" : "hidden"} onSubmit={handleSubmit}>
             <Form.Group controlId="name">
                 <Form.Label>Give this desk a name!</Form.Label>
-                <Form.Control type="text" placeholder="Big Bertha"/>
+                <Form.Control type="text" defaultValue="Big Bertha"/>
             </Form.Group>
             
             <Form.Group controlId="use">
                 <Form.Label>What do you use this desk for?</Form.Label>
-                <Form.Control as="textarea" rows="3" placeholder="WFH, Gaming, Programming..."/>
+                <Form.Control as="textarea" rows="3" defaultValue="WFH, Gaming, Programming..."/>
             </Form.Group>
             
             <Form.Group controlId="favorite">
                 <Form.Label>Which is your favorite product?</Form.Label>
-                <Form.Control as="textarea" rows="3" placeholder="My Macbook!"/>
+                <Form.Control as="textarea" rows="3" defaultValue="My Macbook!"/>
             </Form.Group>
 
             <Button loading={isLoading.toString()} variant="primary" type="submit" disabled={isLoading || !props.image}> 

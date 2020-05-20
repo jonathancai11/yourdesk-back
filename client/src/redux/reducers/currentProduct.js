@@ -1,4 +1,4 @@
-import { SHOW_MODAL, HIDE_MODAL, ADD_PRODUCT } from '../actionTypes';
+import { SHOW_PRODUCT_MODAL, HIDE_PRODUCT_MODAL, SET_CURRENT_PRODUCT } from '../actionTypes';
 
 const initialState = {
     show: false,
@@ -7,19 +7,19 @@ const initialState = {
 
 export default function(state = initialState, action) {
   switch (action.type) {
-    case SHOW_MODAL: {
+    case SHOW_PRODUCT_MODAL: {
         return {
             ...state,
             show: true
         }
     }
-    case HIDE_MODAL: {
+    case HIDE_PRODUCT_MODAL: {
         return {
             ...state,
             show: false
         }
     }
-    case ADD_PRODUCT: {
+    case SET_CURRENT_PRODUCT: {
         const {product} = action.payload;
         return {
             ...state,

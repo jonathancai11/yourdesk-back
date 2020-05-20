@@ -1,17 +1,35 @@
 {
-    "products": {
-      "allIds": [],
-      "byIds": {}
-    },
-    "name": "The Commmand Center",
-    "use": "WFH, Gaming, Programming...",
-    "favorite": "My Macbook!",
-    "user": {
-      "username": "caimjonathan",
-      "firstname": "Jonathan",
-      "lastname": "Cai",
-      "email": "caimjonathan@gmail.com"
-    },
-    "img": "http://res.cloudinary.com/dposi4dxq/image/upload/v1589766547/b2by6kdoukc7d3qyceqe.jpg",
-    "date_created": "2020-05-18T01:49:06.716Z"
+  "products": {
+    "allIds": [
+      1
+    ],
+    "byIds": {
+      "1": {
+        "product": {
+          "coords": {
+            "x": 474,
+            "y": 137
+          },
+          "id": 1,
+          "pros": "Nice battery life",
+          "cons": "Have to buy adapters for everything",
+          "properties": {
+            "brand": "Apple",
+            "model": "Macbook Pro",
+            "category": "Computer",
+            "url": "https://www.amazon.com/Apple-MacBook-13-inch-Storage-Keyboard/dp/B0882KD98F/ref=sr_1_1_sspa",
+            "cost": "1199.99"
+          }
+        },
+        "saved": true,
+        "selected": false
+      }
+    }
+  },
+  "name": "Big Bertha",
+  "use": "WFH, Gaming, Programming...",
+  "favorite": "My Macbook!",
+  "img": "http://res.cloudinary.com/dposi4dxq/image/upload/v1589959993/qrzroyfyvzsia9wv5pia.jpg",
+  "date_created": "2020-05-20T07:33:16.763Z",
+  "user": "5ec4a17e8c2be67157118829"
 }

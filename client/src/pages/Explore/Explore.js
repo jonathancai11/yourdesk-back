@@ -1,39 +1,54 @@
 import React, { useEffect, useState } from 'react';
 import DeskCard from '../../components/DeskCard/DeskCard';
 import { Form, Button, Col, Row } from 'react-bootstrap';
-import { getDesks, deleteDesks, createDesk } from '../../util/api';
+import { getDesks, deleteDesks, createDesk, createUser } from '../../util/api';
+import { useDispatch, useSelector } from "react-redux";
 import sampleDesk from '../../data/sampleDesk.json';
 import "./Explore.css";
 
 export default function Explore() {
 
     const [desks, setDesks] = useState([]);
+    const { user } = useSelector(store => store.user);
+    const dispatch = useDispatch();
  
     useEffect(() => {
         getDesks()
-        .then((data) => {
-            console.log(data);
-            setDesks(data.desks);
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
+            .then((data) => {
+                setDesks(data.desks);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     }, []);
 
     const deleteAllDesks = () => {
         deleteDesks()
-        .then((resp) => {
-            console.log("Backend says deleted all desks successfully");
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
+            .then((resp) => {
+                console.log("Backend says deleted all desks successfully");
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     }
 
     const uploadSampleDesk = () => {
-        createDesk(sampleDesk).then((resp) => {
-            console.log(resp);
-        }).catch(function (error) {
+        let desk = sampleDesk;
+        desk.user = user._id;
+
+        createDesk(sampleDesk)
+            .then((resp) => {
+                console.log(resp);
+            }).catch(function (error) {
+                console.log(error);
+            });
+    }
+
+    const createSampleUser = () => {
+        createUser(user).then(data => {
+            console.log(data);
+        })
+        .catch((error) => {
             console.log(error);
         });
     }
@@ -61,6 +76,11 @@ export default function Explore() {
                     <Button onClick={uploadSampleDesk} variant="outline-success" type="submit">
                         Create Test Desk
                     </Button>
+                    &nbsp;
+                    {/* <Button onClick={createSampleUser} variant="outline-success" type="submit">
+                        Create Test User
+                    </Button> */}
+
                 </Col>
             </Row>
             </Form>

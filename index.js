@@ -2,7 +2,6 @@ import express from 'express';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import routes from './routes/index.js';
-// import uri from './config/keys_prod';
 
 require('dotenv').config()
 var cors = require('cors');
@@ -11,12 +10,12 @@ const path = require('path');
 const app = express();
 
 // /* Connect to the database */
-// try {
-//     mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true});
-// } catch (error) {
-//     console.log("Error on initial connection");
-//     console.log(error);
-// }
+try {
+    mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true});
+} catch (error) {
+    console.log("Error on initial connection");
+    console.log(error);
+}
 
 mongoose.connection.on('error', err => {
     console.log("Error after initial connection");

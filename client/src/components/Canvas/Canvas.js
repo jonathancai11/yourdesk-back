@@ -1,8 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { Stage, Layer, Circle, Image } from "react-konva";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { addProduct, showModal, deselectAllProducts, selectProduct } from '../../redux/actions';
+import { useSelector, useDispatch } from "react-redux";
+import { addProduct, showProductModal, deselectAllProducts, selectProduct, setCurrentProduct } from '../../redux/actions';
 
 export default function Canvas(props) {
 
@@ -30,8 +29,9 @@ export default function Canvas(props) {
                     y: e.evt.layerY,
                 },
             };
+            dispatch(setCurrentProduct(newProduct));
             dispatch(addProduct(newProduct));
-            dispatch(showModal());
+            dispatch(showProductModal());
         }
     }
 

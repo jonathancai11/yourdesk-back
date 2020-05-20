@@ -34,15 +34,14 @@ export function createDesk(desk) {
 }
 
 export function getDesk(username, deskId) {
-
     let params = {
         "username": username, 
         "deskId": deskId
     };
       
     let query = Object.keys(params)
-                .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(params[k]))
-                .join('&');
+        .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(params[k]))
+        .join('&');
       
     return fetch("/api/desk?" + query, {
         method: 'GET',
@@ -57,7 +56,7 @@ export function getDesk(username, deskId) {
 // --------------- PRODUCTS ---------------
 
 export function getFeaturedProducts() {
-    return fetch("/api/product/all/featured").then(resp => resp.json());
+    return fetch("/api/product/featured").then(resp => resp.json());
 }
 
 export function getTopProducts() {
@@ -78,4 +77,37 @@ export function uploadImage(file) {
         data: bodyFormData,
         headers: { 'Content-Type': 'multipart/form-data' }
     });
+}
+
+
+// --------------- USER ---------------
+
+export function createUser(user) {
+    return fetch("/api/user", {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+        body: JSON.stringify({"user": user})
+    }).then(resp => resp.json());
+}
+
+export function getUser(email) {
+    let params = {
+        "email": email, 
+    };
+      
+    let query = Object.keys(params)
+        .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(params[k]))
+        .join('&');
+      
+    return fetch("/api/user?" + query, {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+      }
+    ).then(resp => resp.json())
 }
