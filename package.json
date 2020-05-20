@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "create-env": "printenv > .env",
+    "create-env": "printenv > client/.env",
     "start": "nodemon index.js --exec babel-node --presets env",
     "release": "npm run clean && npm run build && npm run serve",
     "clean": "rm -rf dist && mkdir dist",

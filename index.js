@@ -4,7 +4,7 @@ import bodyParser from 'body-parser';
 import routes from './routes/index.js';
 // import uri from './config/keys_prod';
 
-
+require('dotenv').config()
 var cors = require('cors');
 const path = require('path');
 
