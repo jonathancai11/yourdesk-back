@@ -4,13 +4,13 @@ steps:
 - name: 'gcr.io/cloud-builders/npm'
   args: ["install", "--prefix", "client"]
 - name: 'gcr.io/cloud-builders/npm'
-  args: ["run", "build-client"]
-- name: 'gcr.io/cloud-builders/npm'
   args: ["run", "create-env"]
   env:
     - 'MY_ENV_VAR=${_MY_ENV_VAR}'
     - 'REACT_APP_CLOUDINARY_UPLOAD_PRESET=${_CLOUDINARY_UPLOAD_PRESET}'
     - 'REACT_APP_CLOUDINARY_UPLOAD_URL=${_CLOUDINARY_UPLOAD_URL}'
+- name: 'gcr.io/cloud-builders/npm'
+  args: ["run", "build-client"]
 - name: "gcr.io/cloud-builders/gcloud"
   args: ["app", "deploy", "app.yaml", "-v", "$_GAE_VERSION"]
 timeout: "1600s"
