@@ -6,7 +6,8 @@ import { showAuthModal, signOut } from '../../redux/actions';
 
 function Header() {
     let location = useLocation();
-    let light = location.pathname === "/";
+    // let light = location.pathname === "/";
+    let light = true;
     let { user } = useSelector(store => store.user);
     const dispatch = useDispatch();
 
