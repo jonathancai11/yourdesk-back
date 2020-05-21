@@ -4,7 +4,7 @@ import ProductList from '../../components/ProductList/ProductList';
 import DeskDetails from '../../components/DeskDetails/DeskDetails';
 import { getDesk } from '../../util/api.js';
 import { useDispatch } from 'react-redux';
-import { setAllProducts } from '../../redux/actions';
+import { setAllDeskProducts } from '../../redux/actions';
 
 export default function Desk(props) {
 
@@ -23,7 +23,7 @@ export default function Desk(props) {
                 console.log("Failed to retrieve desk? Either username didn't exist, or desk id didn't exist");
             } else {
                 setDesk(desk);
-                dispatch(setAllProducts(desk.products));
+                dispatch(setAllDeskProducts(desk.products));
             }
         }).catch((error) => {
             console.log(error);

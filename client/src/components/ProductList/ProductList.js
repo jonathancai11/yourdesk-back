@@ -1,69 +1,69 @@
 import React from 'react';
 import { Card, Accordion, Button } from 'react-bootstrap';
 import { useSelector, useDispatch } from "react-redux";
-import { selectProduct, deselectProduct, deleteProduct, setCurrentProduct, showProductModal } from '../../redux/actions';
+import { selectDeskProduct, deselectDeskProduct, deleteDeskProduct, setCurrentDeskProduct, showProductModal } from '../../redux/actions';
 
 export default function ProductCard(props) {
 
     const dispatch = useDispatch();
-    const products = useSelector(store => store.products);
+    const deskProducts = useSelector(store => store.deskProducts);
 
     let total = 0;
-    for (let i = 0; i < products.allIds.length; i++) {
-        let product = products.byIds[products.allIds[i]].product;
-        if (product.properties) {
-            if (product.properties.price) {
-                total += parseFloat(product.properties.price);
+    for (let i = 0; i < deskProducts.allIds.length; i++) {
+        let deskProduct = deskProducts.byIds[deskProducts.allIds[i]].deskProduct;
+        if (deskProduct.product) {
+            if (deskProduct.product.price) {
+                total += parseFloat(deskProduct.product.price);
             }
         }
     }
 
-    const handleMouse = (selected, product) => {
+    const handleMouse = (selected, deskProduct) => {
         if (selected) {
-            dispatch(deselectProduct(product));
+            dispatch(deselectDeskProduct(deskProduct));
         } else {
-            dispatch(selectProduct(product));
+            dispatch(selectDeskProduct(deskProduct));
         }
     }
 
-    const handleDelete = product => {
-        dispatch(deleteProduct(product));
+    const handleDelete = deskProduct => {
+        dispatch(deleteDeskProduct(deskProduct));
     }
 
-    const handleEdit = product => {
-        dispatch(setCurrentProduct(product));
+    const handleEdit = deskProduct => {
+        dispatch(setCurrentDeskProduct(deskProduct));
         dispatch(showProductModal());
     }
 
     return (
     <div className={props.show ? "ProductList" : "hidden"}>
         <Accordion>
-            {products.allIds.map((id, i) =>  
+            {deskProducts.allIds.map((id, i) =>  
                 {
-                    let { product, saved, selected  } = products.byIds[id];
+                    let { deskProduct, saved, selected  } = deskProducts.byIds[id];
                     return (
                     saved &&
                     <Card key={i}>
-                        <Accordion.Toggle as={Card.Header} onMouseOver={() => handleMouse(selected, product)} onMouseOut={() => handleMouse(selected, product)} 
+                        <Accordion.Toggle as={Card.Header} onMouseOver={() => handleMouse(selected, deskProduct)} onMouseOut={() => handleMouse(selected, deskProduct)} 
                             eventKey={i} style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
                             
-                            {product.properties.brand + " " + product.properties.model} {"$" + (product.properties.price ? product.properties.price : "0")}
+                            {deskProduct.product.brand + " " + deskProduct.product.model} {"$" + (deskProduct.product.price ? deskProduct.product.price : "0")}
 
                             <div>
-                                {props.share && <Button variant="outline-primary" size="sm" onClick={() => handleEdit(product)}>Edit</Button>}
+                                {props.share && <Button variant="outline-primary" size="sm" onClick={() => handleEdit(deskProduct)}>Edit</Button>}
                                 &nbsp;
-                                {props.share && <Button variant="outline-danger" size="sm" onClick={() => handleDelete(product)}>Delete</Button>}
+                                {props.share && <Button variant="outline-danger" size="sm" onClick={() => handleDelete(deskProduct)}>Delete</Button>}
                             </div>
                         </Accordion.Toggle>
 
                         <Accordion.Collapse eventKey={i} in={selected}>
                         <Card.Body>
                         
-                        <p>Category: {product.properties.category}</p>
+                        <p>Category: {deskProduct.product.category}</p>
                         <p>Pros:</p>
-                        <p>{product.pros}</p>
+                        <p>{deskProduct.pros}</p>
                         <p>Cons:</p>
-                        <p>{product.cons}</p>
+                        <p>{deskProduct.cons}</p>
 
                         </Card.Body>
                         </Accordion.Collapse>

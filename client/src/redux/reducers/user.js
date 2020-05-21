@@ -8,8 +8,13 @@ const sampleUser = {
   email: "caimjonathan@gmail.com"
 };
 
+// const initialState = {
+//   user: sampleUser,
+//   show_auth_modal: false
+// };
+
 const initialState = {
-  user: sampleUser,
+  user: null,
   show_auth_modal: false
 };
 

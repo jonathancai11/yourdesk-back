@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useSelector, useDispatch } from "react-redux";
-import { clearAllProducts } from '../../redux/actions';
+import { clearAllDeskProducts } from '../../redux/actions';
 import { createDesk, uploadImage } from '../../util/api';
+import { useAuth0 } from "../../react-auth0-spa";
 
 export default function ShareForm(props) {
 
-    const products = useSelector(store => store.products);
+    const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
+
+    const deskProducts = useSelector(store => store.deskProducts);
     const { user } = useSelector(store => store.user);
     const dispatch = useDispatch();
 
@@ -15,6 +18,12 @@ export default function ShareForm(props) {
     const [isLoading, setLoading] = useState(false);
 
     const handleSubmit = event => {
+
+        if (!isAuthenticated) {
+            loginWithRedirect();
+            return;
+        }
+
         setLoading(true);
         event.preventDefault();
         const form = event.currentTarget;
@@ -26,37 +35,33 @@ export default function ShareForm(props) {
           }
         }
 
-        console.log(JSON.stringify(products, null, 2));
+        console.log(JSON.stringify(deskProducts, null, 2));
 
-        onSuccessfulUpload();
-        dispatch(clearAllProducts());
+        uploadImage(props.image.file).then((resp) => {
+            let url = resp.data.url;
 
-        
-        // uploadImage(props.image.file).then((resp) => {
-        //     let url = resp.data.url;
+            var desk = {
+                deskProducts: deskProducts,
+                ...properties,
+                user: user._id,
+                img: url,
+                date_created: new Date(),
+            }
 
-        //     var desk = {
-        //         products: products,
-        //         ...properties,
-        //         user: user._id,
-        //         img: url,
-        //         date_created: new Date(),
-        //     }
+            // console.log(JSON.stringify(desk, null, 2));
 
-        //     // console.log(JSON.stringify(desk, null, 2));
-
-        //     createDesk(desk).then((data) => {
-        //         console.log(data);
-        //         setLoading(false);
-        //         onSuccessfulUpload();
-        //         dispatch(clearAllProducts());
-        //     }).catch(function (error) {
-        //         console.log(error);
-        //     });
-        // }).catch(function (error) {
-        //     console.log("Error uploading image...");
-        //     console.log(error);
-        // });
+            createDesk(desk).then((data) => {
+                console.log(data);
+                setLoading(false);
+                onSuccessfulUpload();
+                dispatch(clearAllDeskProducts());
+            }).catch(function (error) {
+                console.log(error);
+            });
+        }).catch(function (error) {
+            console.log("Error uploading image...");
+            console.log(error);
+        });
     }
 
     return (

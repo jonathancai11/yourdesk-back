@@ -12,11 +12,24 @@ import Desk from './pages/Desk/Desk';
 import FourOhFour from './pages/FourOhFour/FourOhFour';
 import Charts from './pages/Charts/Charts';
 import AuthModal from './components/AuthModal/AuthModal';
+import Profile from "./components/Profile/Profile";
+import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
+import Loading from "./components/Loading/Loading";
+
+import { useAuth0 } from "./react-auth0-spa";
 
 import './style/App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+
+// sudo lsof -i tcp:5000 
+
 function App() {
+  const { loading } = useAuth0();
+
+  if (loading) {
+    return <Loading/>;
+  }
 
   return (
     <div className="App">
@@ -29,6 +42,7 @@ function App() {
               <Route exact path="/share" component={Share}/>
               <Route exact path="/charts" component={Charts}/>
               <Route exact path="/desk/:username/:id" component={Desk}/>
+              <PrivateRoute path="/profile" component={Profile} />
               <Route exact path="/" component={Home}/>
               <Route component={FourOhFour}/>
             </Switch>

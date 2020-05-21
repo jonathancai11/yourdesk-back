@@ -23,6 +23,8 @@ export default function Share() {
     const [image, setImage] = useState(null);
     const [showAlert, setShowAlert] = useState(false);
 
+    console.log(image);
+
     const handleDrop = (e) => {
         if (e.length === 0) {
             setShowAlert(true);
@@ -60,8 +62,6 @@ export default function Share() {
             {<Fade in={showAlert} component={<Alert onClick={() => setShowAlert(false)} variant={'danger'} dismissible>Sorry, only image files please!</Alert>} />}
             <ProductModal/>
             <div className="NewBody">
-
-                {/* TODO: This fade is not working */}
                 { (!show) && <Fade in={!show} component={DrozoneComponent} />} 
                 {<Fade in={show} component={<Canvas show={show} share image={image ? image.blob : null}/>} />}
                 {<Fade in={show} component={<ProductList show={show} share/>} />}

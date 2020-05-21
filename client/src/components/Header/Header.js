@@ -1,43 +1,51 @@
 import React from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
-import { withRouter, useLocation } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
 import { showAuthModal, signOut } from '../../redux/actions';
+import './Header.css';
+import { useAuth0 } from "../../react-auth0-spa";
 
 function Header() {
-    let location = useLocation();
-    // let light = location.pathname === "/";
+
+    const { isAuthenticated, loginWithRedirect, logout, user } = useAuth0();
+
+    console.log(user);
     let light = true;
-    let { user } = useSelector(store => store.user);
-    const dispatch = useDispatch();
 
     const handleSignIn = () => {
-        dispatch(showAuthModal());
+        // dispatch(showAuthModal());
+        loginWithRedirect();
     }
 
     const handleSignOut = () => {
-        dispatch(signOut());
+        logout();
+        // dispatch(signOut());
     }
 
-    const SignedIn = (user && <div style={{display: 'flex', flexDirection: 'row'}}>
-        <Navbar.Text>Hi, {user.firstname}! </Navbar.Text>
-        <Nav.Link onClick={handleSignOut}>Sign Out</Nav.Link>
+    const SignedIn = (isAuthenticated && 
+        <div style={{display: 'flex', flexDirection: 'row'}}>
+            <Navbar.Text>Hi, {user.given_name}! </Navbar.Text> &nbsp;
+            <div className="vl"/>
+            <Nav.Link href="/profile">Profile</Nav.Link>
+            <div className="vl"/>
+            <Nav.Link onClick={handleSignOut}>Sign Out</Nav.Link>
         </div>);
-    const SignedOut = (<Nav.Link onClick={handleSignIn}>Sign In</Nav.Link>);
+    const SignedOut = (!isAuthenticated && <Nav.Link onClick={handleSignIn}>Sign In</Nav.Link>);
     
     return (
-        <Navbar collapseOnSelect expand="lg" bg={light ? "white" : "dark"} variant={light ? "light" : "dark"}>
-            <Navbar.Brand href="/">[Insert Title Here]</Navbar.Brand>
+        <Navbar collapseOnSelect expand="lg" bg={light ? "white" : "dark"} variant={light ? "light" : "dark"} className="Header">
+            <Navbar.Brand href="/" style={{fontSize: "170%"}}>My Desk Tour</Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="mr-auto">
-                    <Nav.Link href="/explore">Explore</Nav.Link>
-                    <Nav.Link href="/charts">Charts</Nav.Link>
-                    <Nav.Link href="/share">Share</Nav.Link>
-                    <Nav.Link href="/about">About</Nav.Link>
+                    <Nav.Link href="/explore" className="HeaderNav">Explore</Nav.Link>
+                    <Nav.Link href="/charts" className="HeaderNav">Charts</Nav.Link>
+                    <Nav.Link href="/share" className="HeaderNav">Share</Nav.Link>
+                    <Nav.Link href="/about" className="HeaderNav">About</Nav.Link>
                 </Nav>
                 <Nav>
-                    { user ? SignedIn : SignedOut }
+                    { isAuthenticated ? SignedIn : SignedOut }
                 </Nav>
             </Navbar.Collapse>
         </Navbar>

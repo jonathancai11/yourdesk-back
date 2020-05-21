@@ -47,37 +47,45 @@ exports.createDesk = (req, res) => {
 
     // desk.date_created = Date.parse(desk.date_created); 
     desk.date_created = new Date(); // CHANGE LATER
-    let products = Object.values(desk.products.byIds);
-    let deskProducts = [];
+    let deskProducts = Object.values(desk.deskProducts.byIds);
+    let newDeskProducts = [];
 
-    for (let i = 0; i < products.length; i++) {
-        let { product } = products[i];
-        let deskProduct = {
-            coordX: product.coords.x,
-            coordY: product.coords.y,
-            id: product.id,
-            product: product.productId,
-            pros: product.pros,
-            cons: product.cons,
+    let failedDesk = 0;
+
+    for (let i = 0; i < deskProducts.length; i++) {
+        let { deskProduct } = deskProducts[i];
+        let createDeskProduct = {
+            coordX: deskProduct.coords.x,
+            coordY: deskProduct.coords.y,
+            id: deskProduct.id,
+            product: deskProduct.product._id,
+            pros: deskProduct.pros,
+            cons: deskProduct.cons,
             saved: true,
             selected: false
         };
-
-        let newDeskProduct = new DeskProduct(deskProduct);
-        
+        let newDeskProduct = new DeskProduct(createDeskProduct);
         newDeskProduct.save((err, x) => {
             if (err) {
-                console.log("FUCKED UP CREATING DESK PRODUCT");
+                console.log("Bad desk product");
+                console.log(createDeskProduct);
                 res.send(err);
+                failedDesk = 1;
+
                 return;
             } else {
-                deskProducts.push(x._id);
+                newDeskProducts.push(x._id);
             }
         });
     }
 
-    delete desk.products;
-    desk.desk_products = deskProducts;
+    if (failedDesk == 1) {
+        console.log("Not creating desk cus bad shit");
+        return;
+    }
+
+    delete desk.deskProducts;
+    desk.desk_roducts = newDeskProducts;
     let newDesk = new Desk(desk);
 
     newDesk.save((err, x) => {

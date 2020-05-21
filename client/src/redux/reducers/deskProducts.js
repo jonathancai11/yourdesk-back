@@ -1,4 +1,4 @@
-import { ADD_PRODUCT, CLEAR_ALL_PRODUCTS, DELETE_PRODUCT, ADD_PRODUCT_PROPERTIES, TOGGLE_SELECTED_PRODUCT, TOGGLE_DESELECT_ALL_PRODUCTS, SET_ALL_PRODUCTS } from "../actionTypes";
+import { ADD_DESK_PRODUCT, CLEAR_ALL_DESK_PRODUCTS, DELETE_DESK_PRODUCT, ADD_DESK_PRODUCT_PROPERTIES, TOGGLE_SELECTED_DESK_PRODUCT, TOGGLE_DESELECT_ALL_DESK_PRODUCTS, SET_ALL_DESK_PRODUCTS } from "../actionTypes";
 
 const initialState = {
   allIds: [],
@@ -12,15 +12,15 @@ function coordsMatch(a, b) {
 export default function(state = initialState, action) {
   switch (action.type) {
 
-    case ADD_PRODUCT: {
-      const { id, product } = action.payload;
+    case ADD_DESK_PRODUCT: {
+      const { id, deskProduct } = action.payload;
       return {
         ...state,
         allIds: [...state.allIds, id],
         byIds: {
           ...state.byIds,
           [id]: {
-            product,
+            deskProduct,
             selected: true,
             saved: false
           }
@@ -28,24 +28,24 @@ export default function(state = initialState, action) {
       };
     }
 
-    case CLEAR_ALL_PRODUCTS: {
+    case CLEAR_ALL_DESK_PRODUCTS: {
       return {
           allIds: [],
           byIds: {}
         };
     }
 
-    case ADD_PRODUCT_PROPERTIES: {
-      const { product } = action.payload;
+    case ADD_DESK_PRODUCT_PROPERTIES: {
+      const { deskProduct } = action.payload;
       return {
         ...state,
         byIds: {
           ...state.byIds,
-          [product.id]: {
-            product: {
-              ...state.byIds[product.id].product,
-              properties: product.properties,
-              productId: product.productId
+          [deskProduct.id]: {
+            deskProduct: {
+              ...state.byIds[deskProduct.id].deskProduct,
+              product: deskProduct.product,
+              productId: deskProduct.productId
             },
             saved: true,
           }
@@ -53,11 +53,11 @@ export default function(state = initialState, action) {
       }
     }
 
-    case DELETE_PRODUCT: {
-      const { product } = action.payload;
+    case DELETE_DESK_PRODUCT: {
+      const { deskProduct } = action.payload;
       for (let i = 0; i < state.allIds.length; i++) {
-        let otherProduct = state.byIds[state.allIds[i]].product;
-        if (coordsMatch(product, otherProduct)) {
+        let otherProduct = state.byIds[state.allIds[i]].deskProduct;
+        if (coordsMatch(deskProduct, otherProduct)) {
           let matchingId = state.allIds[i];
           state.allIds.splice(i, 1);
           delete state.byIds[matchingId];
@@ -72,16 +72,16 @@ export default function(state = initialState, action) {
       break;
     }
 
-    case TOGGLE_SELECTED_PRODUCT: {
-      const { product, selected } = action.payload;
-      let otherProduct = state.byIds[product.id];
+    case TOGGLE_SELECTED_DESK_PRODUCT: {
+      const { deskProduct, selected } = action.payload;
+      let otherProduct = state.byIds[deskProduct.id];
       otherProduct.selected = selected;
       return {
         ...state
       };
     }
 
-    case TOGGLE_DESELECT_ALL_PRODUCTS: {
+    case TOGGLE_DESELECT_ALL_DESK_PRODUCTS: {
       for (let i = 0; i < state.allIds.length; i++) {
         let otherProduct = state.byIds[state.allIds[i]];
         otherProduct.selected = false;
@@ -91,9 +91,9 @@ export default function(state = initialState, action) {
       };
     }
 
-    case SET_ALL_PRODUCTS: {
-      let { products } = action.payload;
-      return products;
+    case SET_ALL_DESK_PRODUCTS: {
+      let { deskProducts } = action.payload;
+      return deskProducts;
     }
 
     default:

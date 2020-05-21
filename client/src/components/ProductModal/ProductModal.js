@@ -1,45 +1,57 @@
 import React, {useEffect, useState} from 'react';
-import { Form, Modal, Button, InputGroup, Row, Col, Image } from 'react-bootstrap';
+import { Form, Modal, Button, Image, InputGroup, Dropdown, ListGroup, DropdownButton, Col } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { useSelector } from "react-redux";
-import { deleteProduct, addProductProperties, hideProductModal, deselectAllProducts } from '../../redux/actions';
+import { deleteDeskProduct, addDeskProductProperties, hideProductModal, deselectAllDeskProducts } from '../../redux/actions';
 import { getProducts } from '../../util/api';
 import './ProductModal.css';
 
-const productTypes = ["", "Computer", "Keyboard", "Mouse", "Monitor","Desk", "Chair", "Accessory", "Decoration", "Other"];
+const productTypes = ["Computer", "Keyboard", "Mouse", "Monitor","Desk", "Chair", "Accessory", "Decoration", "Miscellaneous"];
+const emptyProduct = { brand: "", model: "", category: "", url: "", img: "", price: ""}
 
-const emptyProduct = {
-  brand: "",
-  model: "",
-  category: "",
-  url: "",
-  img: "",
-  price: "",
-}
-
-export default function NewProductModal() {
-
-  const {currentProduct} = useSelector(store => store.currentProduct);
-  const showModal = useSelector(store => store.currentProduct.show);
+export default function ProductModal() {
+  const {currentDeskProduct} = useSelector(store => store.currentDeskProduct);
+  const showModal = useSelector(store => store.currentDeskProduct.show);
+  
   const [products, setProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(emptyProduct);
+  const [selectedCategory, setSelectedCategory] = useState(productTypes[0]);
+
+  const [queriedProducts, setQueriedProducts] = useState([]);
+  const [query, setQuery] = useState([]);
+  const [showProductList, setShowProductList] = useState(false);
   const dispatch = useDispatch();
+  
+  useEffect(() => {
+    if (currentDeskProduct.saved) {
+        setSelectedProduct(currentDeskProduct.product);
+    }
+  }, [currentDeskProduct]);
 
   useEffect(() => {
-
     if (showModal) {
       getProducts()
         .then(data => {
           setProducts(data.products);
         })
     }
-
   }, [showModal])
 
+  useEffect(() => {
+
+    if (!query) {
+      setQueriedProducts([]);
+    } else {
+      let categoryProducts = products.filter(
+        product => product.category === selectedCategory
+      );
+      setQueriedProducts(categoryProducts);
+    }
+  }, [query])
 
   const handleCancelClose = () => {
-    if (!currentProduct.saved) {
-      dispatch(deleteProduct(currentProduct));
+    if (!currentDeskProduct.saved) {
+      dispatch(deleteDeskProduct(currentDeskProduct));
     }
     dispatch(hideProductModal());
     setSelectedProduct(emptyProduct);
@@ -47,40 +59,25 @@ export default function NewProductModal() {
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
-
     const form = event.currentTarget;
-    let properties = {};
-    for (let i = 0; i < form.elements.length; i++) {
-      if (form.elements[i].id) {
-        properties[form.elements[i].id] = form.elements[i].value;
-      }
-    }
-    currentProduct.pros = properties.pros;
-    currentProduct.cons = properties.cons;
-    delete properties.pros;
-    delete properties.cons;
 
-    currentProduct.properties = selectedProduct;
-    currentProduct.productId = selectedProduct._id;
-    currentProduct.saved = true;
+    currentDeskProduct.pros = form.elements["pros"].value;
+    currentDeskProduct.cons = form.elements["cons"].value;
+    currentDeskProduct.product = selectedProduct;
+    currentDeskProduct.saved = true;
 
-    dispatch(addProductProperties(currentProduct));
-    dispatch(deselectAllProducts());
+    dispatch(addDeskProductProperties(currentDeskProduct));
+    dispatch(deselectAllDeskProducts());
     dispatch(hideProductModal());
     setSelectedProduct(emptyProduct);
   }
 
-  const handleSelectProduct = (e) => {
-    let idx = e.currentTarget.value;
-    if (idx === '-1') {
-      setSelectedProduct(emptyProduct);
-    } else {
-      setSelectedProduct(products[idx]);
-    }
+  const handleSearch = (e) => {
+    setShowProductList(true);
+    let query = e.target.value;
+    setQuery(query);
   }
-  
   let disabled = selectedProduct.brand;
-  // let disabled = true;
 
   return (
     <Modal show={showModal} onHide={handleCancelClose} animation={true} backdrop={true} dialogClassName='CustomDialogue'>
@@ -90,82 +87,55 @@ export default function NewProductModal() {
     <Modal.Body>
         <Form onSubmit={handleFormSubmit}>
 
-        <Form.Group controlId="product" as={Row}>
-            <Form.Label column sm="2">Product</Form.Label>
-            <Col sm="10">
-              <Form.Control as="select" onChange={handleSelectProduct}>
-              <option value={-1}>Select a product or create a new one:</option>
-                {products.map((product, i) => {
-                  return <option key={i} value={i}>{product.brand + ' ' + product.model}</option>
-                })}
-              </Form.Control>
-            </Col>
+        <Form.Group controlId="product">
+            <InputGroup className="mb-3">
+              <DropdownButton
+                as={InputGroup.Prepend}
+                variant="outline-primary"
+                title={selectedCategory}
+                id="input-group-dropdown-1">
+                {productTypes.map((type, i) => (
+                  <Dropdown.Item onClick={() => {
+                    setShowProductList(true);
+                    setSelectedCategory(type)
+                  }} key={i}>{type}</Dropdown.Item>
+                ))}
+              </DropdownButton>
+              <Col>
+                <Form.Control placeholder="Search for the product" onChange={handleSearch} value={query}/>
+                <ListGroup className="ProductDropDown" style={showProductList ? {} : {display: "none"}}>
+                    {queriedProducts.map((product, i) => 
+                      <ListGroup.Item key={i} onClick={() => {
+                        setShowProductList(false);
+                        setSelectedProduct(product);
+                        setQuery(product.brand + " " + product.model);
+                        }} className="ProductDropDownItem">
+                        {product.brand + " " + product.model}
+                      </ListGroup.Item>)}
+                </ListGroup>
+              </Col>
+            </InputGroup>
           </Form.Group>
 
-          <Form.Group controlId="brand" as={Row}>
-            <Form.Label column sm="2">Brand</Form.Label>
-              <Col sm="10">
-            <Form.Control disabled={disabled} value={selectedProduct.brand}/>
-            </Col>
-          </Form.Group>
-
-          <Form.Group controlId="model" as={Row}>
-            <Form.Label column sm="2">Model</Form.Label>
-            <Col sm="10">
-              <Form.Control disabled={disabled} value={selectedProduct.model}/>
-            </Col>
-          </Form.Group>
-          
-          <Form.Group controlId="category" as={Row}>
-            <Form.Label column sm="2">Category</Form.Label>
-            <Col sm="10">
-              <Form.Control disabled={disabled} as="select" value={selectedProduct.category}>
-                {productTypes.map((type, i) => {
-                  return <option key={i}>{type}</option>
-                })}
-              </Form.Control>
-            </Col>
-          </Form.Group>
-
-          <Form.Group controlId="url" as={Row} readOnly>
-            <Form.Label column sm="2">URL</Form.Label>
-            <Col sm="10">
-              <Form.Control disabled={true} value={selectedProduct.url}/>
-            </Col>
-          </Form.Group>
-          
+          {selectedProduct.img && 
           <div className="ProductImageContainer">
             <Image src={selectedProduct.img} rounded fluid className="ProductImage"/>
-          </div>
-          <br/>
-
-          <Form.Group controlId="price" as={Row} readOnly>
-          <Form.Label column sm="2">Price</Form.Label>
-          <Col sm="10">
-            <InputGroup className="mb-3">
-              <InputGroup.Prepend>
-                <InputGroup.Text>$</InputGroup.Text>
-              </InputGroup.Prepend>
-              <Form.Control disabled={true} value={selectedProduct.price} type="text" aria-label="Amount (to the nearest dollar)" />
-            </InputGroup>
-          </Col>
-          </Form.Group>
-
+          </div>}
 
           <Form.Group controlId="pros">
             <Form.Label>Pros</Form.Label>
-            <Form.Control as="textarea" rows="1" placeholder="Nice battery life"/>
+            <Form.Control as="textarea" rows="1" value={currentDeskProduct.pros}/>
           </Form.Group>
 
           <Form.Group controlId="cons">
             <Form.Label>Cons</Form.Label>
-            <Form.Control as="textarea" rows="1" placeholder="Have to buy adapters for everything"/>
+            <Form.Control as="textarea" rows="1" value={currentDeskProduct.cons} />
           </Form.Group>
 
           <Button variant="secondary" onClick={handleCancelClose}>
             Cancel
           </Button> &nbsp;
-          <Button disabled={ !currentProduct.saved && !selectedProduct.brand } variant="primary" type="submit">
+          <Button disabled={ !disabled } variant="primary" type="submit">
             Save
           </Button>
         

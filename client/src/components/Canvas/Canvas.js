@@ -1,12 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import { Stage, Layer, Circle, Image } from "react-konva";
 import { useSelector, useDispatch } from "react-redux";
-import { addProduct, showProductModal, deselectAllProducts, selectProduct, setCurrentProduct } from '../../redux/actions';
+import { addDeskProduct, showProductModal, deselectAllDeskProducts, selectDeskProduct, setCurrentDeskProduct } from '../../redux/actions';
 
 export default function Canvas(props) {
 
     const dispatch = useDispatch();
-    const products = useSelector(store => store.products);
+    const deskProducts = useSelector(store => store.deskProducts);
     const [image, setImage] = useState(new window.Image());
     
     useEffect(() => {
@@ -22,24 +22,24 @@ export default function Canvas(props) {
 
     const layerHandleClick = (e) => {
         if (props.share && !e.target.attrs.radius) {
-            // If not circle, create a new product
             let newProduct = {
                 coords: {
                     x: e.evt.layerX,
                     y: e.evt.layerY,
                 },
+                saved: false
             };
-            dispatch(setCurrentProduct(newProduct));
-            dispatch(addProduct(newProduct));
+            dispatch(setCurrentDeskProduct(newProduct));
+            dispatch(addDeskProduct(newProduct));
             dispatch(showProductModal());
         }
     }
 
     const handleHover = (e) => {
-        if (e.target.attrs.product) {
-            dispatch(selectProduct(e.target.attrs.product));
+        if (e.target.attrs.deskProduct) {
+            dispatch(selectDeskProduct(e.target.attrs.deskProduct));
         } else {
-            dispatch(deselectAllProducts());
+            dispatch(deselectAllDeskProducts());
         }
     }
     
@@ -49,19 +49,19 @@ export default function Canvas(props) {
             <Layer onClick={layerHandleClick} >
             <Image x={0} y={0} image={image} />
             
-            {products.allIds.map((id, i) =>  
+            {deskProducts.allIds.map((id, i) =>  
                 {
-                    let { product, selected } = products.byIds[id];
+                    let { deskProduct, selected } = deskProducts.byIds[id];
                     return (<Circle 
                     key={i}
-                    x={product.coords.x} 
-                    y={product.coords.y} 
+                    x={deskProduct.coords.x} 
+                    y={deskProduct.coords.y} 
                     width={ selected ? 30 : 20} 
                     height={ selected ? 30 : 20} 
                     fill={ "white" }
                     shadowBlur={2}
                     opacity={ 1 }
-                    product={product}
+                    deskProduct={deskProduct}
                     />)
                 }
             )}

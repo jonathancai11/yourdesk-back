@@ -1,29 +1,29 @@
-import { SHOW_PRODUCT_MODAL, HIDE_PRODUCT_MODAL, SET_CURRENT_PRODUCT } from '../actionTypes';
+import { SHOW_DESK_PRODUCT_MODAL, HIDE_DESK_PRODUCT_MODAL, SET_CURRENT_DESK_PRODUCT } from '../actionTypes';
 
 const initialState = {
     show: false,
-    currentProduct: {}
+    currentDeskProduct: {}
 };
 
 export default function(state = initialState, action) {
   switch (action.type) {
-    case SHOW_PRODUCT_MODAL: {
+    case SHOW_DESK_PRODUCT_MODAL: {
         return {
             ...state,
             show: true
         }
     }
-    case HIDE_PRODUCT_MODAL: {
+    case HIDE_DESK_PRODUCT_MODAL: {
         return {
             ...state,
             show: false
         }
     }
-    case SET_CURRENT_PRODUCT: {
-        const {product} = action.payload;
+    case SET_CURRENT_DESK_PRODUCT: {
+        const {deskProduct} = action.payload;
         return {
             ...state,
-            currentProduct: product
+            currentDeskProduct: deskProduct
         }
     }
     

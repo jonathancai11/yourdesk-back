@@ -1,5 +1,6 @@
 .DeskImage {
-    width: 150vh;
+    padding-top: 20vh;
+    width: 70%;
     margin: 0 auto;
 }
 
@@ -9,15 +10,15 @@
 }
 
 .HomeTitle {
-    font-family: 'Recoleta Black';
+    /* font-family: 'Recoleta Black'; */
     font-weight: 900;
-    font-size: 400%;
+    font-size: 300%;
 }
 
 .HomeSubtitle {
     padding-top: 90px;
     padding-bottom: 10px;
-    font-family: 'Recoleta Black';
+    /* font-family: 'Recoleta Black'; */
     font-weight: 900;
     font-size: 250%;
 }

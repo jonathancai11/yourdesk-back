@@ -35,13 +35,12 @@ export default function Home() {
                 
                 {/* <div className="Splash"> */}
                 <div className="SplashText">
-                    <h1 className="HomeTitle">As we work/game/study at our desk more often,</h1>
-                    <h1 className="HomeTitle">it's important that we love our desk.</h1>
+                    <h1 className="HomeTitle">If you spend a lot of time on your desk, make sure that you love it!</h1>
                 </div>
                 <img className="DeskImage" alt="" src={deskImg}/>
                 {/* </div> */}
 
-                <h3 className="HomeSubtitle">See what desks other people work/game/study on.</h3>
+                <h3 className="HomeSubtitle">Check out the desks other people work/game/study on.</h3>
                 <div className="FeaturedList">
                     {featuredDesks.map((desk, i) => <DeskCard key={i} desk={desk}/>)}
                 </div>
@@ -53,5 +52,6 @@ export default function Home() {
 
             </div>
         </div>
+        // If you spend a lot of time on your desk, make sure that you love it!
     );
 }
