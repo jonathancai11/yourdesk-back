@@ -9,10 +9,6 @@ const DeskProductScheme = new Schema({
         type: Number,
         required: true,
     },
-    coordY: {
-        type: Number,
-        required: true,
-    },
     id: {
         type: Number,
         required: true

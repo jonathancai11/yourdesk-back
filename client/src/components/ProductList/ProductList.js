@@ -12,8 +12,8 @@ export default function ProductCard(props) {
     for (let i = 0; i < products.allIds.length; i++) {
         let product = products.byIds[products.allIds[i]].product;
         if (product.properties) {
-            if (product.properties.cost) {
-                total += parseFloat(product.properties.cost);
+            if (product.properties.price) {
+                total += parseFloat(product.properties.price);
             }
         }
     }
@@ -40,35 +40,35 @@ export default function ProductCard(props) {
         <Accordion>
             {products.allIds.map((id, i) =>  
                 {
-                let { product, saved, selected  } = products.byIds[id];
-                return (
-                saved &&
-                <Card key={i}>
-                    <Accordion.Toggle as={Card.Header} onMouseOver={() => handleMouse(selected, product)} onMouseOut={() => handleMouse(selected, product)} 
-                        eventKey={i} style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
+                    let { product, saved, selected  } = products.byIds[id];
+                    return (
+                    saved &&
+                    <Card key={i}>
+                        <Accordion.Toggle as={Card.Header} onMouseOver={() => handleMouse(selected, product)} onMouseOut={() => handleMouse(selected, product)} 
+                            eventKey={i} style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
+                            
+                            {product.properties.brand + " " + product.properties.model} {"$" + (product.properties.price ? product.properties.price : "0")}
+
+                            <div>
+                                {props.share && <Button variant="outline-primary" size="sm" onClick={() => handleEdit(product)}>Edit</Button>}
+                                &nbsp;
+                                {props.share && <Button variant="outline-danger" size="sm" onClick={() => handleDelete(product)}>Delete</Button>}
+                            </div>
+                        </Accordion.Toggle>
+
+                        <Accordion.Collapse eventKey={i} in={selected}>
+                        <Card.Body>
                         
-                        {product.properties.brand + " " + product.properties.model} {"$" + (product.properties.cost ? product.properties.cost : "0")}
+                        <p>Category: {product.properties.category}</p>
+                        <p>Pros:</p>
+                        <p>{product.pros}</p>
+                        <p>Cons:</p>
+                        <p>{product.cons}</p>
 
-                        <div>
-                            {props.share && <Button variant="outline-danger" size="sm" onClick={() => handleDelete(product)}>Delete</Button>}
-                            &nbsp;
-                            {props.share && <Button variant="outline-primary" size="sm" onClick={() => handleEdit(product)}>Edit</Button>}
-                        </div>
-                    </Accordion.Toggle>
-
-                    <Accordion.Collapse eventKey={i} in={selected}>
-                    <Card.Body>
-                    
-                    <p>Category: {product.properties.category}</p>
-                    <p>Pros:</p>
-                    <p>{product.pros}</p>
-                    <p>Cons:</p>
-                    <p>{product.cons}</p>
-
-                    </Card.Body>
-                    </Accordion.Collapse>
-                </Card>
-                );
+                        </Card.Body>
+                        </Accordion.Collapse>
+                    </Card>
+                    );
             }
             )}        
         <hr/>

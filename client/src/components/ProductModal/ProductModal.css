@@ -5,7 +5,11 @@
 }
 
 .CustomDialogue {
-    left: 10%;
-    top: 3.5%;
+    left: 20%;
+    /* top: 3.5%; */
   }
   
+
+.ProductImage {
+    width: 100px;
+}

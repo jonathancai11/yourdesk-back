@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
-import { useSelector } from "react-redux";
-
+import { useSelector, useDispatch } from "react-redux";
+import { clearAllProducts } from '../../redux/actions';
 import { createDesk, uploadImage } from '../../util/api';
 
 export default function ShareForm(props) {
 
     const products = useSelector(store => store.products);
     const { user } = useSelector(store => store.user);
+    const dispatch = useDispatch();
 
     const { onSuccessfulUpload } = props; 
 
@@ -24,31 +25,38 @@ export default function ShareForm(props) {
             properties[form.elements[i].id] = form.elements[i].value;
           }
         }
+
+        console.log(JSON.stringify(products, null, 2));
+
+        onSuccessfulUpload();
+        dispatch(clearAllProducts());
+
         
-        uploadImage(props.image.file).then((resp) => {
-            let url = resp.data.url;
+        // uploadImage(props.image.file).then((resp) => {
+        //     let url = resp.data.url;
 
-            var desk = {
-                products: products,
-                ...properties,
-                user: user._id,
-                img: url,
-                date_created: new Date(),
-            }
+        //     var desk = {
+        //         products: products,
+        //         ...properties,
+        //         user: user._id,
+        //         img: url,
+        //         date_created: new Date(),
+        //     }
 
-            console.log(JSON.stringify(desk, null, 2));
+        //     // console.log(JSON.stringify(desk, null, 2));
 
-            createDesk(desk).then((data) => {
-                console.log(data);
-                setLoading(false);
-                onSuccessfulUpload();
-            }).catch(function (error) {
-                console.log(error);
-            });
-        }).catch(function (error) {
-            console.log("Error uploading image...");
-            console.log(error);
-        });
+        //     createDesk(desk).then((data) => {
+        //         console.log(data);
+        //         setLoading(false);
+        //         onSuccessfulUpload();
+        //         dispatch(clearAllProducts());
+        //     }).catch(function (error) {
+        //         console.log(error);
+        //     });
+        // }).catch(function (error) {
+        //     console.log("Error uploading image...");
+        //     console.log(error);
+        // });
     }
 
     return (

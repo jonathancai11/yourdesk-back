@@ -1,14 +1,15 @@
 {
   "products": {
     "allIds": [
-      1
+      1,
+      2
     ],
     "byIds": {
       "1": {
         "product": {
           "coords": {
-            "x": 474,
-            "y": 137
+            "x": 465,
+            "y": 194
           },
           "id": 1,
           "pros": "Nice battery life",
@@ -18,8 +19,30 @@
             "model": "Macbook Pro",
             "category": "Computer",
             "url": "https://www.amazon.com/Apple-MacBook-13-inch-Storage-Keyboard/dp/B0882KD98F/ref=sr_1_1_sspa",
-            "cost": "1199.99"
-          }
+            "price": "1199.99"
+          },
+          "productId": "5ec4e65c23bf23e8d7ff8c36"
+        },
+        "saved": true,
+        "selected": false
+      },
+      "2": {
+        "product": {
+          "coords": {
+            "x": 284,
+            "y": 155
+          },
+          "id": 2,
+          "pros": "Nice battery life",
+          "cons": "Have to buy adapters for everything",
+          "properties": {
+            "brand": "HP",
+            "model": "27f",
+            "category": "Monitor",
+            "url": "https://www.amazon.com/Apple-MacBook-13-inch-Storage-Keyboard/dp/B0882KD98F/ref=sr_1_1_sspa",
+            "price": "1199.99"
+          },
+          "productId": "5ec4e64b23bf23e8d7ff8c35"
         },
         "saved": true,
         "selected": false
@@ -29,7 +52,7 @@
   "name": "Big Bertha",
   "use": "WFH, Gaming, Programming...",
   "favorite": "My Macbook!",
-  "img": "http://res.cloudinary.com/dposi4dxq/image/upload/v1589959993/qrzroyfyvzsia9wv5pia.jpg",
-  "date_created": "2020-05-20T07:33:16.763Z",
-  "user": "5ec4a17e8c2be67157118829"
+  "user": "5ec4a17e8c2be67157118829",
+  "img": "http://res.cloudinary.com/dposi4dxq/image/upload/v1589962277/rpqs3bpqxcshi3uvlljw.jpg",
+  "date_created": "2020-05-20T08:11:19.014Z"
 }

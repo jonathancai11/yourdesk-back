@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ProductList from '../../components/ProductList/ProductList';
-import NewProductModal from '../../components/NewProductModal/NewProductModal';
+import ProductModal from '../../components/ProductModal/ProductModal';
 import Canvas from '../../components/Canvas/Canvas';
 import ShareForm from '../../components/ShareForm/ShareForm';
 import Dropzone from 'react-dropzone';
@@ -58,7 +58,7 @@ export default function Share() {
     return (
         <div className="body">
             {<Fade in={showAlert} component={<Alert onClick={() => setShowAlert(false)} variant={'danger'} dismissible>Sorry, only image files please!</Alert>} />}
-            <NewProductModal/>
+            <ProductModal/>
             <div className="NewBody">
 
                 {/* TODO: This fade is not working */}

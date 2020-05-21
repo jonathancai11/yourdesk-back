@@ -27,6 +27,7 @@ p.DropzonePrompt {
 .ProductList {
     width: 50vh;
     padding: 20px;
+    padding-left: 40px;
     display: flex;
     flex-direction: column;
 }

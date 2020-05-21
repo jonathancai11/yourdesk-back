@@ -8,7 +8,7 @@ export default function DeskCard(props) {
     return (
         <div>
             <Card style={{ width: '18rem', margin: '10px' }}>
-            <Card.Img variant="top" src={desk.img} thumbnail="true"/>
+            <Card.Img variant="top" src={desk.img} thumbnail="true" height="200px" />
             <Card.Body>
                 <Card.Title>{desk.name}</Card.Title>
                 <Card.Text>

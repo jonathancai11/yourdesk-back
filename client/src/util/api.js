@@ -33,6 +33,10 @@ export function createDesk(desk) {
     }).then(resp => resp.json());
 }
 
+export function getProducts() {
+    return fetch("/api/product/all").then(resp => resp.json());
+}
+
 export function getDesk(username, deskId) {
     let params = {
         "username": username, 
@@ -61,6 +65,17 @@ export function getFeaturedProducts() {
 
 export function getTopProducts() {
     return getFeaturedProducts();
+}
+
+export function createProduct(product) {
+    return fetch("/api/product", {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+        body: JSON.stringify({"product": product})
+    }).then(resp => resp.json());
 }
 
 

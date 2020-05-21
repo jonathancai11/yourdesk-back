@@ -29,7 +29,6 @@ export default function(state = initialState, action) {
     }
 
     case CLEAR_ALL_PRODUCTS: {
-      console.log("CLEAR ALL PRODUCTS")
       return {
           allIds: [],
           byIds: {}
@@ -46,8 +45,9 @@ export default function(state = initialState, action) {
             product: {
               ...state.byIds[product.id].product,
               properties: product.properties,
+              productId: product.productId
             },
-            saved: true
+            saved: true,
           }
         }
       }

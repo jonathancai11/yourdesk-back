@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { hideAuthModal } from '../../redux/actions';
 import { Modal, Button } from 'react-bootstrap';

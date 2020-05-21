@@ -26,9 +26,13 @@ const DeskScheme = new Schema({
         ref: 'User',
         required: true
     },
-    products: [{
+    img: {
+        type: String, 
+        required: true
+    },
+    desk_products: [{
         type: mongoose.Schema.Types.ObjectId, 
-        ref: 'Product',
+        ref: 'DeskProduct',
     }]
 });
 
