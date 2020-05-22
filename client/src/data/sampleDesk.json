@@ -1,58 +1,56 @@
 {
-  "products": {
-    "allIds": [
-      1,
-      2
-    ],
-    "byIds": {
-      "1": {
-        "product": {
-          "coords": {
-            "x": 465,
-            "y": 194
-          },
-          "id": 1,
-          "pros": "Nice battery life",
-          "cons": "Have to buy adapters for everything",
-          "properties": {
-            "brand": "Apple",
-            "model": "Macbook Pro",
-            "category": "Computer",
-            "url": "https://www.amazon.com/Apple-MacBook-13-inch-Storage-Keyboard/dp/B0882KD98F/ref=sr_1_1_sspa",
-            "price": "1199.99"
-          },
-          "productId": "5ec4e65c23bf23e8d7ff8c36"
+  "allIds": [
+    3,
+    4
+  ],
+  "byIds": {
+    "3": {
+      "deskProduct": {
+        "coords": {
+          "x": 322,
+          "y": 159
         },
         "saved": true,
-        "selected": false
+        "id": 3,
+        "pros": "",
+        "cons": "",
+        "product": {
+          "_id": "5ec4e5cc2ea68e989e22b8ed",
+          "brand": "HP",
+          "model": "27f",
+          "category": "Monitor",
+          "img": "https://images-na.ssl-images-amazon.com/images/I/71V2rgkb2rL._AC_SL1500_.jpg",
+          "url": "https://www.amazon.com/HP-Display-Ultra-Slim-Backlit-Micro-Edge/dp/B07CPCHSV5",
+          "price": 1199.99,
+          "__v": 0
+        }
       },
-      "2": {
-        "product": {
-          "coords": {
-            "x": 284,
-            "y": 155
-          },
-          "id": 2,
-          "pros": "Nice battery life",
-          "cons": "Have to buy adapters for everything",
-          "properties": {
-            "brand": "HP",
-            "model": "27f",
-            "category": "Monitor",
-            "url": "https://www.amazon.com/Apple-MacBook-13-inch-Storage-Keyboard/dp/B0882KD98F/ref=sr_1_1_sspa",
-            "price": "1199.99"
-          },
-          "productId": "5ec4e64b23bf23e8d7ff8c35"
+      "saved": true,
+      "selected": false
+    },
+    "4": {
+      "deskProduct": {
+        "coords": {
+          "x": 478,
+          "y": 187
         },
         "saved": true,
-        "selected": false
-      }
+        "id": 4,
+        "pros": "",
+        "cons": "",
+        "product": {
+          "_id": "5ec4e45fe1e4cb977b5a888e",
+          "brand": "Apple",
+          "model": "Macbook Pro",
+          "category": "Computer",
+          "img": "https://images-na.ssl-images-amazon.com/images/I/71HI3U9ZwZL._AC_SL1500_.jpg",
+          "url": "https://www.amazon.com/Apple-MacBook-13-inch-Storage-Keyboard/dp/B0882KD98F/ref=sr_1_1_sspa",
+          "price": 1199.99,
+          "__v": 0
+        }
+      },
+      "saved": true,
+      "selected": false
     }
-  },
-  "name": "Big Bertha",
-  "use": "WFH, Gaming, Programming...",
-  "favorite": "My Macbook!",
-  "user": "5ec4a17e8c2be67157118829",
-  "img": "http://res.cloudinary.com/dposi4dxq/image/upload/v1589962277/rpqs3bpqxcshi3uvlljw.jpg",
-  "date_created": "2020-05-20T08:11:19.014Z"
+  }
 }

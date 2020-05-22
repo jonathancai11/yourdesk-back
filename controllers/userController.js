@@ -1,33 +1,20 @@
-import mongoose from 'mongoose'; 
-import User from '../models/userModel.js';
-
-exports.createUser = (req, res) => {
-    console.log("Creating user");
-    let { user } = req.body;
-    console.log(user);
-    let newUser = new User(user);
-    newUser.save((err, x) => {
-        if (err) {
-            res.send(err);
-        } else {
-            res.json({
-                success: true
-            });
-        }
-    });
-};
+import axios from "axios";
 
 exports.getUser = (req, res) => {
-    let { email } = req.query;
-    console.log("Getting user " + email);
-    User.find({'email': email}, (err, x) => {
-        if (err) {
-            res.send(err);
-        } else {
-            res.json({
-                user: x[0],
-                success: x.length > 0
-            });
-        }
+    let { user_id } = req.query;
+    console.log("getting user " + user_id);
+    axios({
+        method: "GET",
+        url: "https://my-desk-tour.auth0.com/api/v2/users/" + user_id,
+    }).then(resp => {
+        let user = resp.data;
+        res.json({
+            user: user,
+            sucess: true
+        })
+    }).catch(err => {
+        res.json({
+            success: false
+        })
     });
 };

@@ -1,5 +1,5 @@
 {
-  "name": "lists-back",
+  "name": "yourdesk",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -7,31 +7,34 @@
     "create-env": "printenv > client/.env",
     "start": "nodemon index.js --exec babel-node --presets env",
     "release": "npm run clean && npm run build && npm run serve",
-    "clean": "rm -rf dist && mkdir dist",
     "build": "babel . -s -D -d dist --presets env --ignore node_modules",
-    "server": "nodemon index.js --exec babel-node --presets env",
+    "server": "npm run kill & nodemon index.js --exec babel-node --presets env",
     "client": "npm start --prefix client",
     "serve": "node dist/index.js",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "build-client": "npm run build --prefix client",
-    "deploy": "npm run build-client && gcloud app deploy"
+    "deploy": "npm run build-client && gcloud app deploy",
+    "kill": "kill $(lsof -t -i:5000) | exit 0"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@auth0/auth0-spa-js": "^1.8.1",
+    "axios": "^0.19.2",
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "concurrently": "^5.2.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "express-graphql": "^0.9.0",
+    "graphql": "^15.0.0",
     "mongoose": "^5.9.7",
-    "nodemon": "^2.0.2"
+    "request": "^2.88.2"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",
-    "nodemon": "^2.0.2"
+    "nodemon": "^1.17.5"
   }
 }

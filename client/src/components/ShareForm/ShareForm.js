@@ -4,23 +4,20 @@ import { useSelector, useDispatch } from "react-redux";
 import { clearAllDeskProducts } from '../../redux/actions';
 import { createDesk, uploadImage } from '../../util/api';
 import { useAuth0 } from "../../react-auth0-spa";
+import { URI } from '../../util/api';
 
 export default function ShareForm(props) {
 
-    const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
-
+    const { isAuthenticated, loginWithRedirect, user } = useAuth0();
     const deskProducts = useSelector(store => store.deskProducts);
-    const { user } = useSelector(store => store.user);
     const dispatch = useDispatch();
-
     const { onSuccessfulUpload } = props; 
-
     const [isLoading, setLoading] = useState(false);
 
     const handleSubmit = event => {
 
         if (!isAuthenticated) {
-            loginWithRedirect();
+            loginWithRedirect({ redirect_uri: URI + "share"});
             return;
         }
 
@@ -43,12 +40,12 @@ export default function ShareForm(props) {
             var desk = {
                 deskProducts: deskProducts,
                 ...properties,
-                user: user._id,
+                user: user,
                 img: url,
                 date_created: new Date(),
             }
 
-            // console.log(JSON.stringify(desk, null, 2));
+            console.log(JSON.stringify(desk, null, 2));
 
             createDesk(desk).then((data) => {
                 console.log(data);

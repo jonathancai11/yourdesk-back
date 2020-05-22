@@ -23,8 +23,6 @@ export default function Share() {
     const [image, setImage] = useState(null);
     const [showAlert, setShowAlert] = useState(false);
 
-    console.log(image);
-
     const handleDrop = (e) => {
         if (e.length === 0) {
             setShowAlert(true);

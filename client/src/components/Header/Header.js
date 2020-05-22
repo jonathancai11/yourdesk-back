@@ -1,26 +1,18 @@
 import React from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
-import { useSelector, useDispatch } from "react-redux";
-import { showAuthModal, signOut } from '../../redux/actions';
-import './Header.css';
 import { useAuth0 } from "../../react-auth0-spa";
+import './Header.css';
 
 function Header() {
-
     const { isAuthenticated, loginWithRedirect, logout, user } = useAuth0();
-
-    console.log(user);
     let light = true;
 
     const handleSignIn = () => {
-        // dispatch(showAuthModal());
         loginWithRedirect();
     }
-
     const handleSignOut = () => {
         logout();
-        // dispatch(signOut());
     }
 
     const SignedIn = (isAuthenticated && 

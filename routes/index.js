@@ -31,6 +31,5 @@ export default (app) => {
 
     app.route('/api/user')
         .get(userbook.getUser)
-        .post(userbook.createUser)
 
 };

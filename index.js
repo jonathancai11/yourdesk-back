@@ -2,6 +2,8 @@ import express from 'express';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import routes from './routes/index.js';
+import Schema from './Schema';
+import graphqlHTTP from 'express-graphql';
 
 require('dotenv').config()
 var cors = require('cors');
@@ -22,7 +24,6 @@ mongoose.connection.on('error', err => {
     console.log(err);
 });
   
-      
 /* Middleware */
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -48,13 +49,18 @@ app.use((err, req, res, next) => {
 /**
  * Register the routes
  */
+// routes(app);
 
-routes(app);
 
-// Serve static files from the React frontend app
-app.use(express.static(path.join(__dirname, 'client/build')));
+app.use('/graphql', graphqlHTTP({
+  schema: Schema,
+  graphiql: true,
+}));
 
-// Anything that doesn't match the above, send back index.html
+// // Serve static files from the React frontend app
+// app.use(express.static(path.join(__dirname, 'client/build')));
+
+// // Anything that doesn't match the above, send back index.html
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname + '/client/build/index.html'));
 })
@@ -62,3 +68,9 @@ app.get('*', (req, res) => {
 const port = process.env.PORT || '5000'; app.listen(port); 
 
 console.log(`Listening on port ${port}`);
+
+process.once('SIGUSR2', function () {
+  server.close(function () {
+    process.kill(process.pid, 'SIGUSR2')
+  })
+});

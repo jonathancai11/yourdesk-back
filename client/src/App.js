@@ -11,7 +11,6 @@ import Explore from './pages/Explore/Explore';
 import Desk from './pages/Desk/Desk';
 import FourOhFour from './pages/FourOhFour/FourOhFour';
 import Charts from './pages/Charts/Charts';
-import AuthModal from './components/AuthModal/AuthModal';
 import Profile from "./components/Profile/Profile";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import Loading from "./components/Loading/Loading";
@@ -22,7 +21,7 @@ import './style/App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
-// sudo lsof -i tcp:5000 
+// kill -9 $(lsof -ti tcp:5000) 
 
 function App() {
   const { loading } = useAuth0();
@@ -35,7 +34,6 @@ function App() {
     <div className="App">
       <Router>
           <Header/>
-          <AuthModal/>
             <Switch>
               <Route exact path="/explore" component={Explore}/>
               <Route exact path="/about" component={About}/>

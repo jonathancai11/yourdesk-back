@@ -2,14 +2,12 @@ import React, { useEffect, useState } from 'react';
 import DeskCard from '../../components/DeskCard/DeskCard';
 import { Form, Button, Col, Row } from 'react-bootstrap';
 import { getDesks, deleteDesks, createDesk } from '../../util/api';
-import { useSelector } from "react-redux";
 import sampleDesk from '../../data/sampleDesk.json';
 import "./Explore.css";
 
 export default function Explore() {
 
     const [desks, setDesks] = useState([]);
-    const { user } = useSelector(store => store.user);
  
     useEffect(() => {
         getDesks()
@@ -32,9 +30,6 @@ export default function Explore() {
     }
 
     const uploadSampleDesk = () => {
-        let desk = sampleDesk;
-        desk.user = user._id;
-
         createDesk(sampleDesk)
             .then((resp) => {
                 console.log(resp);

@@ -2,7 +2,7 @@ import axios from "axios";
 import { CLOUDINARY_UPLOAD_PRESET, CLOUDINARY_UPLOAD_URL } from './config.js';
 
 
-export const URI = process.env.NODE_ENV === 'development' ? 'http://localhost:3000/share' : 'https://yourdesk.wl.r.appspot.com/share';
+export const URI = process.env.NODE_ENV === 'development' ? 'http://localhost:3000/' : 'https://yourdesk.wl.r.appspot.com/';
 // export const URL = 
 
 // --------------- DESKS ---------------
